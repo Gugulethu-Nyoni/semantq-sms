@@ -2,7 +2,7 @@
  * SMS Manager for @semantq/sms
  * The central orchestrator (Factory) for SMS drivers.
  */
-import getSemantqConfig from './config_loader.js';
+import getSemantqConfig from '../../../../config_loader.js';
 import SmsPortalDriver from './drivers/smsportal.js';
 import TwilioDriver from './drivers/twilio.js';
 import MockDriver from './drivers/mock.js';
