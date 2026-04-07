@@ -1,0 +1,12 @@
+@semantq/sms/
+├── src/
+│   ├── drivers/
+│   │   ├── driver.interface.js  # Abstract-like base class
+│   │   ├── twilio.js           # Twilio implementation
+│   │   ├── resend-sms.js       # (Example) Resend implementation
+│   │   └── mock.js             # Logging-only for dev
+│   ├── config_loader.js         # Your provided config logic
+│   ├── sms_manager.js          # Core Orchestrator (Factory)
+│   └── index.js                # Public API entry point
+├── package.json                # "type": "module"
+└── README.md

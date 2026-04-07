@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semantq SMS Portal | Eventique</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --semantq-navy: #0A192F;
+            --semantq-gold: #C5A059;
+            --semantq-charcoal: #333333;
+        }
+        body { background-color: var(--semantq-navy); color: white; font-family: 'Inter', sans-serif; }
+        .gold-border { border-color: var(--semantq-gold); }
+        .btn-gold { background-color: var(--semantq-gold); color: var(--semantq-navy); transition: all 0.3s ease; }
+        .btn-gold:hover { background-color: #e2ba74; transform: translateY(-1px); }
+        .input-dark { background-color: rgba(255, 255, 255, 0.05); border: 1px solid rgba(197, 160, 89, 0.3); color: white; }
+        .input-dark:focus { border-color: var(--semantq-gold); outline: none; box-shadow: 0 0 0 2px rgba(197, 160, 89, 0.2); }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-6">
+
+    <div class="max-w-md w-full bg-[#112240] rounded-xl shadow-2xl p-8 border-t-4 gold-border">
+        <header class="mb-8 text-center">
+            <h1 class="text-2xl font-bold tracking-tight mb-1">Semantq <span class="text-[#C5A059]">SMS</span></h1>
+            <p class="text-gray-400 text-sm">Eventique Communications Gateway</p>
+        </header>
+
+        <form id="smsForm" class="space-y-6">
+            <div>
+                <label for="mobile" class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Recipient Mobile</label>
+                <input type="text" id="mobile" name="mobile" 
+                    placeholder="+27 82 000 0000" 
+                    class="input-dark w-full px-4 py-3 rounded-lg text-lg"
+                    required>
+            </div>
+
+            <div>
+                <label for="message" class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">SMS Content</label>
+                <textarea id="message" name="message" rows="4" 
+                    placeholder="Enter your message..." 
+                    class="input-dark w-full px-4 py-3 rounded-lg resize-none"
+                    required></textarea>
+                <div class="flex justify-end mt-1">
+                    <span id="charCount" class="text-[10px] text-gray-500 uppercase tracking-widest">0 / 160</span>
+                </div>
+            </div>
+
+            <button type="submit" id="submitBtn" class="btn-gold w-full py-4 rounded-lg font-bold uppercase tracking-widest text-sm">
+                Transmit Message
+            </button>
+        </form>
+
+        <div id="statusBox" class="hidden mt-6 p-4 rounded-lg text-sm border">
+            <div id="statusContent" class="flex items-center space-x-3">
+                <span id="statusIcon"></span>
+                <span id="statusMessage"></span>
+            </div>
+        </div>
+
+        <footer class="mt-8 text-center">
+            <p class="text-[10px] text-gray-600 uppercase tracking-widest">Powered by @semantq/sms</p>
+        </footer>
+    </div>
+
+    <script>
+        const form = document.getElementById('smsForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const statusBox = document.getElementById('statusBox');
+        const statusMessage = document.getElementById('statusMessage');
+        const messageInput = document.getElementById('message');
+        const charCount = document.getElementById('charCount');
+
+        // Character counter logic
+        messageInput.addEventListener('input', () => {
+            const len = messageInput.value.length;
+            charCount.innerText = `${len} / 160`;
+            charCount.style.color = len > 160 ? '#ff4d4d' : '#6b7280';
+        });
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                mobile: document.getElementById('mobile').value,
+                message: document.getElementById('message').value
+            };
+
+            // UI Loading State
+            submitBtn.disabled = true;
+            submitBtn.innerText = 'Transmitting...';
+            statusBox.className = 'mt-6 p-4 rounded-lg text-sm border bg-blue-900/20 border-blue-500/50 text-blue-200';
+            statusBox.classList.remove('hidden');
+            statusMessage.innerText = 'Connecting to Semantq Gateway...';
+
+            try {
+                // Adjust this URL to match your server.js port (e.g., 3003)
+                const response = await fetch('http://localhost:3003/api/send-sms', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    statusBox.className = 'mt-6 p-4 rounded-lg text-sm border bg-green-900/20 border-green-500/50 text-green-200';
+                    statusMessage.innerHTML = `<strong>Success:</strong> Message dispatched via <u>${result.provider}</u>.<br>Ref: ${result.messageId}`;
+                    form.reset();
+                    charCount.innerText = "0 / 160";
+                } else {
+                    throw new Error(result.error || 'Gateway Rejected Request');
+                }
+            } catch (err) {
+                statusBox.className = 'mt-6 p-4 rounded-lg text-sm border bg-red-900/20 border-red-500/50 text-red-200';
+                statusMessage.innerText = `Error: ${err.message}`;
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = 'Transmit Message';
+            }
+        });
+    </script>
+</body>
+</html>

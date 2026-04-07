@@ -1,0 +1,22 @@
+{
+  "name": "@semantq/sms",
+  "version": "1.0.0",
+  "description": "Configurable SMS gateway for the Semantq ecosystem",
+  "type": "module",
+  "main": "src/index.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "test": "node src/index.js"
+  },
+  "keywords": [
+    "semantq",
+    "sms",
+    "smsportal",
+    "twilio"
+  ],
+  "author": "Semantq Team",
+  "license": "ISC",
+  "dependencies": {}
+}
