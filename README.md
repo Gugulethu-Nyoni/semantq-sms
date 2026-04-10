@@ -9,6 +9,10 @@ Install via npm:
 ```bash
 npm install @semantq/sms
 ```
+OR 
+```bash
+npm i @semantq/sms
+```
 
 *Note: This module requires Node.js v18+ and an ESM-based project (`"type": "module"` in package.json).*
 
