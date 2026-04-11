@@ -9,7 +9,8 @@ Install via npm:
 ```bash
 npm install @semantq/sms
 ```
-OR 
+OR
+
 ```bash
 npm i @semantq/sms
 ```
@@ -48,6 +49,8 @@ export default {
 ## Usage
 
 The module exports a singleton `sms` object. It handles lazy-loading of the driver and configuration automatically upon the first request.
+
+A paylod template will be created that you can customise and use in your services.
 
 ### Basic Send
 ```javascript
