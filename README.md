@@ -23,6 +23,9 @@ npm i @semantq/sms
 The module automatically looks for a `server.config.js` file in your project root using the Semantq Config Loader. 
 
 ### Setup `server.config.js`
+
+run `semantq make:sms RegistrationSMS`
+
 Add the `sms` block to your existing configuration:
 
 ```javascript
