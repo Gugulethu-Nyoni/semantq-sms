@@ -24,7 +24,11 @@ The module automatically looks for a `server.config.js` file in your project roo
 
 ### Setup `server.config.js`
 
-run `semantq make:sms RegistrationSMS`
+run `semantq make:sms RegistrationSms`
+
+
+This will create the script like the one below this in semantqQL/sms/Registrationsms dir 
+
 
 Add the `sms` block to your existing configuration:
 
