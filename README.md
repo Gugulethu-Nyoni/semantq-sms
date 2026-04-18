@@ -187,7 +187,7 @@ The module provides console logging for important events:
 
 ```javascript
 import { SmsService } from '@semantq/sms';
-import { UserService } from '@semantq/user';
+//import { UserService } from '@semantq/user';
 
 async function sendVerificationCode(userId) {
   const user = await UserService.findById(userId);
