@@ -209,7 +209,7 @@ async function sendVerificationCode(userId) {
 
 ## License
 
-© 2026 Semantq ICT Innovation. Proprietary / Internal Use.
+© 2026 Semantq. 
 
 ## Support
 
