@@ -183,7 +183,7 @@ The module provides console logging for important events:
 - Send failures: `[SMSPortal Driver] Failed to send SMS to {number}: {error}`
 - Manager fallbacks: `[Semantq SMS] Send failure: {error}`
 
-## Example: Integration with Semantq Services
+## Example: Integration with semantqQL Services
 
 ```javascript
 import { SmsService } from '@semantq/sms';
