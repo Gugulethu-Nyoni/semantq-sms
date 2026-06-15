@@ -208,6 +208,9 @@ async function sendVerificationCode(userId) {
 }
 ```
 
+# TODOs
+- Add twilio 
+
 ## License
 
 © 2026 Semantq. 
