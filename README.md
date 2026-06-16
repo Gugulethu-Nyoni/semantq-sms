@@ -210,6 +210,7 @@ async function sendVerificationCode(userId) {
 
 # TODOs
 - Add twilio 
+- Restructure for custom service provider
 
 ## License
 
