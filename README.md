@@ -1,6 +1,6 @@
 # Documentation for `@semantq/sms`
 
-A high-performance, driver-based SMS gateway for the **Semantq** ecosystem. Designed to integrate seamlessly with `server.config.js` to provide unified messaging across Eventique and other Semantq-powered platforms.
+A high-performance, driver-based SMS gateway for the **semantq** ecosystem. Designed to integrate seamlessly with semantqQL `server.config.js` to provide unified messaging across Eventique and other Semantq-powered platforms.
 
 
 ```bash
