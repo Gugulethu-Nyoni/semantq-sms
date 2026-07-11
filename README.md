@@ -29,7 +29,7 @@ Add the `sms` block to your existing configuration:
 export default {
   // ... other configs
   sms: {
-    driver: 'smsportal', // Options: 'smsportal' | 'twilio' | 'mock'
+    driver: 'smsportal', // bulkms, Options: 'smsportal' | 'twilio' | 'mock'
     
     smsportal: {
       apiId: 'your-api-id',
